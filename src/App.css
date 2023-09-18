@@ -1,6 +1,7 @@
-.App {
+/* .App {
   text-align: center;
-}
+  display: flex;
+} */
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +36,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Myself */
+nav{
+  position: sticky;
+  top: 0;
+}
+nav ul{
+  display: flex;
+}
+li{
+  text-decoration: none;
+  list-style: none;
+
 }
