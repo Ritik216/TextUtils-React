@@ -1,33 +1,88 @@
 // import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import About from './components/About';
+import Navbar from "./components/Navbar";
+import TextForm from "./components/TextForm.1";
+import Alert from "./components/Alert";
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 function App() {
-  return (<>
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-    <div className="container-fluid">
-      <a className="navbar-brand" href="#">Navbar</a>
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
-          </li>
-          
-         
-        </ul>
-        <form className="d-flex" role="search">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
+  // https://v5.reactrouter.com/web/api/Switch ---> Documentation of react router
+
+
+  // Enabling dark and light mode in textform
+  const toggleMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+
+      document.body.style.backgroundColor = "#211b4a";
+      showalert("Dark Mode Enabled", "success");
+      document.title = "Dark Mode Enabled";
+    } else {
+      setMode("light");
+
+      document.body.style.backgroundColor = "white";
+      showalert("Light Mode Enabled", "success");
+      document.title = "Light Mode Enabled";
+    }
+  };
+
+  // Given below state is for alert
+  const [alert, setalert] = useState(null);
+
+  // This method is for setting type and msg for alert
+  const showalert = (message, type) => {
+    setalert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setalert(null);
+    }, 1500);
+  };
+
+  // Given below state is for dark and light mode
+  const [mode, setMode] = useState("light");
+  return (
+    <>
+    <Router>
+      <Navbar
+        title="TextUtils"
+        aboutText="About"
+        mode={mode}
+        toggleMode={toggleMode}/>
+      {/* <Navbar title="TextUtils"/> */}
+      {/* <Navbar/> */}
+      <Alert alert={alert} />
+     
+
+      <div className="container my-3">
+      <Routes>
+
+      <Route path="/about" element={<About />} />
+
+      <Route path="/" element={<TextForm showalert={showalert} heading="Enter the text to analyze below" mode={mode} />} />
+
+        {/* The Syntax below only works for old version */}
+          {/* <Route path="/about">
+            <About/>
+          </Route> */}
+          {/* <Route path="/">
+          <TextForm
+          showalert={showalert}
+          heading="Enter the text to analyze below"
+          mode={mode}
+          />
+          </Route> */}
+        </Routes>
       </div>
-    </div>
-  </nav>  
-  </>
+      </Router>
+    </>
   );
 }
 

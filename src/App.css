@@ -40,15 +40,33 @@
 
 
 /* Myself */
-nav{
+/* .atag{
+  color: white;
+} */
+/* .navbar{
+  background-color: black;
+  
+} */
+
+/* button{
+  margin: 0 20px;
+} */
+.btn:hover{
+  /* color: yellow; */
+  background-color:pink;
+}
+
+.aboutbutton{
+  
+  margin: 5px 0;
+  
+}
+
+.ritik{
   position: sticky;
   top: 0;
 }
-nav ul{
-  display: flex;
-}
-li{
-  text-decoration: none;
-  list-style: none;
 
+.textbutton{
+  margin: 0 10px;
 }
